@@ -17,7 +17,13 @@ class Settings(BaseSettings):
         ),
     )
 
-    kafka_bootstrap_servers: str = "redpanda:29092"
+    kafka_bootstrap_servers: str = Field(
+        default="kafka:9092",
+        validation_alias=AliasChoices(
+            "KAFKA_BOOTSTRAP_SERVERS",
+            "KAFKA_BROKERS",
+        ),
+    )
     kafka_topic_ads: str = Field(
         default="ads",
         validation_alias=AliasChoices(
