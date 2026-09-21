@@ -32,7 +32,7 @@ class Settings(BaseSettings):
         ),
     )
     kafka_consumer_group: str = "search-service"
-    ad_service_url: str = "http://marketplace-ad-service:8000"
+    ad_service_url: str = "http://ad-service:8002"
 
     @field_validator("database_url", mode="before")
     @classmethod
