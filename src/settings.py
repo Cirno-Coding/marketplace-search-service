@@ -10,9 +10,7 @@ class Settings(BaseSettings):
     )
 
     database_url: str = Field(
-        default=(
-            "postgresql+asyncpg://postgres:postgres@localhost:5435/search_db"
-        ),
+        default=("postgresql+asyncpg://postgres:postgres@localhost:5435/search_db"),
         validation_alias=AliasChoices(
             "DATABASE_URL",
             "POSTGRES_CONNECTION_STRING",
@@ -42,7 +40,5 @@ class Settings(BaseSettings):
         if value.startswith("postgresql+asyncpg://"):
             return value
         if value.startswith("postgresql://"):
-            return value.replace(
-                "postgresql://", "postgresql+asyncpg://", 1
-            )
+            return value.replace("postgresql://", "postgresql+asyncpg://", 1)
         return value.replace("postgres://", "postgresql+asyncpg://", 1)
