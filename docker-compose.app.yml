@@ -49,6 +49,7 @@ services:
       DATABASE_URL: postgresql+asyncpg://postgres:postgres@search-postgres:5432/search_db
       KAFKA_BOOTSTRAP_SERVERS: redpanda:29092
       AD_SERVICE_URL: http://ad-service:8002
+      KAFKA_TOPIC_ADS: ads
     depends_on:
       search-postgres:
         condition: service_healthy
