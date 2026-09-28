@@ -7,6 +7,7 @@ import pytest
 from src.application.ports.ad_source import AdSnapshot, AdSource
 from src.application.ports.repositories import SearchRepository, SortKey
 from src.application.ports.uow import UnitOfWork
+from src.application.tracing import current_trace_id
 from src.domain.entities import SearchDocument
 
 
@@ -94,9 +95,11 @@ class FakeAdSource(AdSource):
     def __init__(self, snapshots: dict[int, AdSnapshot] | None = None) -> None:
         self._snapshots: dict[int, AdSnapshot] = snapshots or {}
         self.calls: list[int] = []
+        self.trace_ids: list[str | None] = []
 
     async def get(self, ad_id: int) -> AdSnapshot | None:
         self.calls.append(ad_id)
+        self.trace_ids.append(current_trace_id())
         return self._snapshots.get(ad_id)
 
     def set(self, snapshot: AdSnapshot) -> None:

@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     )
 
     kafka_bootstrap_servers: str = Field(
-        default="kafka:9092",
+        default="localhost:9092",
         validation_alias=AliasChoices(
             "KAFKA_BOOTSTRAP_SERVERS",
             "KAFKA_BROKERS",
@@ -32,7 +32,7 @@ class Settings(BaseSettings):
         ),
     )
     kafka_consumer_group: str = "search-service"
-    ad_service_url: str = "http://ad-service:8002"
+    ad_service_url: str = "http://localhost:8002"
 
     @field_validator("database_url", mode="before")
     @classmethod
